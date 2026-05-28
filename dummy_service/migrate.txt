@@ -1,0 +1,2 @@
+docker compose exec payment-service \
+python migrations/init_db.py

@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from sqlalchemy import Column, Integer, String, DateTime, Text, JSON
 from db.database import Base
 
@@ -10,10 +8,7 @@ class Transaction(Base):
     transaction_id = Column(String, unique=True)
     status = Column(String)
     amount = Column(Integer)
-    created_at = Column(
-    DateTime,
-    default=datetime.utcnow
-)
+    created_at = Column(DateTime)
 
 class ServiceEvent(Base):
     __tablename__ = "service_events"
@@ -30,7 +25,4 @@ class ServiceEvent(Base):
 
     event_metadata = Column(JSON)
 
-    created_at = Column(
-    DateTime,
-    default=datetime.utcnow
-)
+    created_at = Column(DateTime)

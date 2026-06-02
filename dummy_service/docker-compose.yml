@@ -2,6 +2,8 @@
 services:
 
   api-service:
+    labels:
+     service: api-service
     build: ./api-service
     ports:
       - "8000:8000"
@@ -10,6 +12,8 @@ services:
         condition: service_healthy
 
   payment-service:
+    labels:
+     service: payment-service
     build: ./payment-service
     ports:
       - "8001:8001"

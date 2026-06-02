@@ -1,2 +1,10 @@
 docker compose exec payment-service \
 python migrations/init_db.py
+
+# test request - 
+for i in {1..20}; do                                                                                                                   12s
+  curl -X POST http://localhost:8000/checkout
+done
+
+failuer
+curl -X POST http://localhost:8001/simulate/failure

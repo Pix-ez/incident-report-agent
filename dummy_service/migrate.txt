@@ -1,6 +1,10 @@
 docker compose exec payment-service \
 python migrations/init_db.py
 
+
+http://prometheus:9090
+http://loki:3100
+
 # test request - 
 for i in {1..20}; do                                                                                                                   12s
   curl -X POST http://localhost:8000/checkout
@@ -8,3 +12,5 @@ done
 
 failuer
 curl -X POST http://localhost:8001/simulate/failure
+
+docker network - docker network create incident-net

@@ -37,10 +37,10 @@ services:
       timeout: 5s
       retries: 5
 
-  redis:
-    image: redis:7
-    ports:
-      - "6379:6379"
+  # redis:
+  #   image: redis:7
+  #   ports:
+  #     - "6379:6379"
 
   prometheus:
     image: prom/prometheus
@@ -48,6 +48,9 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml
+    networks:
+      - incident-net
 
   grafana:
     image: grafana/grafana
@@ -55,12 +58,16 @@ services:
       - "3000:3000"
     depends_on:
       - prometheus
+    networks:
+      - incident-net
 
 
   loki:
     image: grafana/loki:latest
     ports:
       - "3100:3100"
+    networks:
+      - incident-net
 
   promtail:
     image: grafana/promtail:latest
@@ -70,6 +77,26 @@ services:
     command: -config.file=/etc/promtail/config.yml
 
 
+  alertmanager:
+    image: prom/alertmanager:latest
+
+    container_name: alertmanager
+
+    ports:
+      - "9093:9093"
+
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+
+    networks:
+      - incident-net
 
 volumes:
   postgres_data:
+
+networks:
+  incident-net:
+    external: true

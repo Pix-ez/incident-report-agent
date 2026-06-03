@@ -1,0 +1,11 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: incident-webhook
+
+receivers:
+  - name: incident-webhook
+
+    webhook_configs:
+      - url: "http://incident-service:8002/webhook/alert"

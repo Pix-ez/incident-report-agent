@@ -1,0 +1,52 @@
+groups:
+
+- name: payment-alerts
+
+  rules:
+
+  - alert: HighPaymentFailureRate
+
+    expr: payment_failures_total > 5
+
+    for: 30s
+
+    labels:
+      severity: critical
+
+    annotations:
+      summary: High payment failure rate
+
+      description: More than 5 payment failures detected
+    
+
+  - alert: HighLatency
+
+    expr: histogram_quantile(
+            0.95,
+            rate(http_request_latency_seconds_bucket[1m])
+          ) > 3
+
+    for: 1m
+
+    labels:
+      severity: warning
+
+    annotations:
+      summary: High latency
+
+      description: P95 latency exceeds 3 seconds
+
+
+  - alert: ServiceDown
+
+    expr: up == 0
+
+    for: 30s
+
+    labels:
+      severity: critical
+
+    annotations:
+      summary: Service unavailable
+
+      description: One service is down

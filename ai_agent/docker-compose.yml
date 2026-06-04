@@ -1,0 +1,28 @@
+services:
+
+  incident-service:
+
+    build: .
+
+    ports:
+      - "8002:8002"
+
+    
+    networks:
+      - incident-net
+
+
+  investigation-worker:
+
+    build: .
+
+    command: >
+      python -u -m workers.investigation_worker
+
+    networks:
+      - incident-net
+
+
+networks:
+  incident-net:
+    external: true

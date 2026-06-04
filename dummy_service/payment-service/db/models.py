@@ -34,3 +34,27 @@ class ServiceEvent(Base):
     DateTime,
     default=datetime.utcnow
 )
+    
+
+
+
+class Incident(Base):
+    __tablename__ = "incidents"
+
+    id = Column(Integer, primary_key=True)
+
+    incident_id = Column(String, unique=True)
+
+    alert_name = Column(String)
+
+    severity = Column(String)
+
+    service = Column(String)
+
+    status = Column(String)
+
+    alert_payload = Column(JSON)
+
+    created_at = Column(DateTime)
+
+    updated_at = Column(DateTime)

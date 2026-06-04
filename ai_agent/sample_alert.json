@@ -1,0 +1,17 @@
+{
+  "receiver":"incident-webhook",
+  "status":"firing",
+  "alerts":[
+    {
+      "status":"firing",
+      "labels":{
+        "alertname":"HighPaymentFailureRate",
+        "severity":"critical",
+        "service":"payment-service"
+      },
+      "annotations":{
+        "summary":"High payment failure rate"
+      }
+    }
+  ]
+}

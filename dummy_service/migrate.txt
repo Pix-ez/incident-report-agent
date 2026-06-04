@@ -2,8 +2,29 @@ docker compose exec payment-service \
 python migrations/init_db.py
 
 
+docker compose exec incident-service \
+python migrations/init_db.py
+
+docker compose exec postgres \
+psql -U admin -d incidentlab
+
 http://prometheus:9090
 http://loki:3100
+
+
+loki logs- 
+{job="docker"}
+{job="docker"} |= "payment_failed"
+{job="docker"} |= "database_timeout"
+
+db check - 
+SELECT COUNT(*) FROM transactions;
+SELECT COUNT(*) FROM service_events;
+
+SELECT *
+FROM service_events
+ORDER BY id DESC
+LIMIT 10;
 
 # test request - 
 for i in {1..20}; do                                                                                                                   12s

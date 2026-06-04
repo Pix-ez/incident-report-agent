@@ -1,5 +1,3 @@
-
-
 import sys
 
 sys.path.append("/app")
@@ -7,9 +5,8 @@ sys.path.append("/app")
 from db.database import engine
 from db.models import Base
 
-print("Creating database tables...")
+print("Creating tables...")
 
 Base.metadata.create_all(bind=engine)
 
-print("Database initialized successfully.")
-
+print("Done.")

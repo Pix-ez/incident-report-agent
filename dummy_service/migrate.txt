@@ -8,6 +8,10 @@ python migrations/init_db.py
 docker compose exec postgres \
 psql -U admin -d incidentlab
 
+/dt = show all tables
+
+docker compose exec redis redis-cli
+
 http://prometheus:9090
 http://loki:3100
 

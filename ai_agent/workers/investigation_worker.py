@@ -56,9 +56,20 @@ while True:
         )
 
         logger.info(
-            f"Completed {incident_id}"
+            f"Pushing into analysis queue: {incident_id}"
+        )
+        redis_client.lpush(
+            "analysis-queue",
+            json.dumps(
+                {
+                    "incident_id": incident_id
+                }
+            )
         )
 
+        logger.info(
+            f"Completed {incident_id}"
+        )
     except Exception as e:
 
         logger.exception(

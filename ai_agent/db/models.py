@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Text, JSON
+from sqlalchemy import Column, Integer, String, DateTime, Text, JSON, Float
 from datetime import datetime
 
 from db.database import Base
@@ -46,3 +46,41 @@ class Investigation(Base):
         DateTime,
         default=datetime.utcnow
     )
+
+#store LLM result data
+class InvestigationResult(Base):
+    __tablename__ = "investigation_results"
+
+    id = Column(Integer, primary_key=True)
+
+    incident_id = Column(String)
+
+    root_cause = Column(Text)
+
+    confidence = Column(Float)
+
+    severity = Column(String)
+
+    recommendations = Column(JSON)
+
+    evidence_summary = Column(JSON)
+
+    status = Column(String)
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow
+    )
+
+#status 
+# OPEN
+
+# INVESTIGATING
+
+# ANALYZED
+
+# WAITING_HUMAN
+
+# RESOLVED
+
+# FAILED

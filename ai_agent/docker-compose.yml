@@ -21,7 +21,18 @@ services:
 
     networks:
       - incident-net
+  
+  analysis-worker:
+    build: .
 
+    command: >
+      python -u -m workers.analysis_worker
+
+    networks:
+      - incident-net
+    
+    environment:
+      - GROK_API_KEY=${GROK_API_KEY}
 
 networks:
   incident-net:

@@ -18,7 +18,7 @@ from schemas.analysis import RCAResponse
 from services.llm_service import (
     analyze_incident
 )
-
+from services.evidence_builder import EvidenceBuilder
 import logging
 
 logging.basicConfig(
@@ -41,6 +41,7 @@ redis_client = redis.Redis(
     socket_connect_timeout=30
 )
 
+builder = EvidenceBuilder()
 
 def build_context(
     investigation
@@ -94,10 +95,21 @@ def process_incident(
 
         return
 
-    context = build_context(
+    context = builder.build(
         investigation
     )
 
+
+    payload = json.dumps(
+        context,
+        indent=2
+    )
+
+    logger.info(
+        f"Payload Size : {len(payload)} bytes"
+    )
+
+    
     logger.info(
         f"Running RCA for {incident_id}"
     )

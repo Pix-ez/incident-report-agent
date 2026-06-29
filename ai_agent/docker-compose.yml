@@ -31,8 +31,8 @@ services:
     networks:
       - incident-net
     
-    environment:
-      - GROK_API_KEY=${GROK_API_KEY}
+    env_file:
+      - .env
 
 networks:
   incident-net:

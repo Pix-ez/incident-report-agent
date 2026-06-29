@@ -14,7 +14,7 @@ from  clients.loki_client import (
 )
 
 
-prom = PrometheusClient()
+prometheus = PrometheusClient()
 
 loki = LokiClient()
 
@@ -73,13 +73,14 @@ def investigate_incident(
         incident.alert_name
     )
 
-    metrics = {}
-
-    for metric in config["metrics"]:
-
-        metrics[metric] = (
-            prom.query(metric)
-        )
+    metrics = {
+    "payment_failures": prometheus.query(
+        "payment_failures_total"
+    ),
+    "latency": prometheus.query(
+        "http_request_latency_seconds"
+    )
+}
 
     logs = loki.query(
         config["log_query"]

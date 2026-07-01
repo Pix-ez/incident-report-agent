@@ -34,6 +34,14 @@ services:
     env_file:
       - .env
 
+  dashboard-api:
+    build: ./dashboard-api
+    ports:
+      - "8003:8003"
+    networks:
+      - incident-net
+
+
 networks:
   incident-net:
     external: true

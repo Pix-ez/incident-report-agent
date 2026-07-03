@@ -11,13 +11,13 @@ import RecommendationCard from "../components/RecommendationCard"
 import InvestigationTabs from "../components/InvestigationTabs"
 
 import { Button } from "@/components/ui/button"
-
 import {
     ArrowLeft,
     Check,
     X,
     ShieldCheck
 } from "lucide-react"
+import type { Incident } from "@/types"
 
 
 export default function IncidentDetails() {
@@ -27,9 +27,9 @@ export default function IncidentDetails() {
     const { incidentId } = useParams()
     const [loading, setLoading] = useState(true)
 
-    const [incident, setIncident] = useState()
+    const [incident, setIncident] = useState<Incident>()
 
-    const [analysis, setAnalysis] = useState()
+    const [analysis, setAnalysis] = useState<any>()
 
     const [investigation, setInvestigation] = useState()
 

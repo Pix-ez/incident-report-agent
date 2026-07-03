@@ -40,7 +40,17 @@ services:
       - "8003:8003"
     networks:
       - incident-net
+  
 
+
+  dashboard-ui:
+    build: ./dashboard-ui
+    ports:
+      - "8080:80"
+    networks:
+      - incident-net
+    env_file:
+      - ./dashboard-ui/.env
 
 networks:
   incident-net:

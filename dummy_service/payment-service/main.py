@@ -53,10 +53,14 @@ async def process_payment(request: Request, db: Session = Depends(get_db)):
     )
 
     
+    # print("Endpoint hit")
+
     REQUEST_COUNT.labels(
         service="payment-service",
         endpoint="/process-payment"
-        ).inc()
+    ).inc()
+
+    # print("Counter incremented")
 
     with REQUEST_LATENCY.labels(
     service="payment-service",

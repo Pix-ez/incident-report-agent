@@ -16,3 +16,4 @@ PAYMENT_FAILURES = Counter(
     "payment_failures_total",
     "Payment failures"
 )
+# print("Loading Prometheus metrics...")
